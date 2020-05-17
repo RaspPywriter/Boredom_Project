@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+<head>
+{% block head %}
+</head>
+
+{% endblock %}
+{% block body %}
+<!-- Add icon library -->
+<body>
+<h1 class="title">Click the number of participants to see a suggested activity:</h1>
+<div class="title" id="output"></div>
+<div class="grid-container">
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="1"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="2"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="3"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="4"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="5"/>
+
+</div>
+
+
+
+ <script type="text/javascript">
+  var output = document.getElementById('output');
+  function find_activity_types(value) {
+  const Parturl = "https://www.boredapi.com/api/activity?participants="
+  const url = Parturl + value
+  const Http = new XMLHttpRequest();
+  Http.open("GET", url);
+  Http.send();
+  Http.onreadystatechange = (e) => {
+  data = Http.responseText;
+  var jsonResponse = JSON.parse(data);
+  var activity = jsonResponse["activity"];
+
+  output.innerHTML = activity;
+ }
+}
+
+
+</script>
+</body>
+{% endblock %}

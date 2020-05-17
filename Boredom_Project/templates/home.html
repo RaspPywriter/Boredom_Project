@@ -1,0 +1,25 @@
+<!-- type in base.html-->
+{% extends 'base.html'%}
+<head>
+
+
+{% block head %}
+<title>Boredom Buster!</title>
+
+{% endblock %}
+ </head>
+<body>
+#below is where you will ask users to pick which way they want to go
+{% block body %}
+
+    <h1>Cure your boredom by choosing one of the options below!</h1>
+
+        <a href="{{ url_for('type')}}">Find an activity by type</a><br>
+        <br>
+        <a href="{{ url_for('participants')}}">Find an activity by number of participants</a><br>
+        <br>
+        <a href="{{ url_for('random')}}">Use the Random Activity Generator</a>
+
+
+{% endblock %}
+</body>

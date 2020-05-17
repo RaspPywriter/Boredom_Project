@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+<!--need extend or it will not appear-->
+{% block head %}
+<!--title makes it appear in the web title bar-->
+<head>
+
+<title>Activity Type Selection</title>
+
+</head>
+{% endblock %}
+
+{% block body %}
+<!-- Add icon library -->
+<body>
+
+<h1 class="title">Click one of the buttons below to see a suggested activity:</h1>
+<div class="title" id="output"></div>
+<div class="grid-container">
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="charity"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="relaxation"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="education"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="recreational"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="music"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="social"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="cooking"/>
+<input class="btn" type = "button" onclick="find_activity_types(value)" value="busywork"/>
+<input class="button" type = "button" onclick="find_activity_types(value)" value="diy"/>
+</div>
+<div class=padding></div>
+
+
+
+ <script type="text/javascript">
+  var output = document.getElementById('output');
+  function find_activity_types(value) {
+  const Parturl = "https://www.boredapi.com/api/activity?type="
+  const url = Parturl + value
+  const Http = new XMLHttpRequest();
+  Http.open("GET", url);
+  Http.send();
+  Http.onreadystatechange = (e) => {
+  data = Http.responseText;
+  var jsonResponse = JSON.parse(data);
+  var activity = jsonResponse["activity"];
+
+  output.innerHTML = activity;
+ }
+}
+
+
+</script>
+</body>
+{% endblock %}

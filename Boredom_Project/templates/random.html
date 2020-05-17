@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+<!--need extend or it will not appear-->
+{% block head %}
+<!--title makes it appear in the web title bar-->
+<head>
+
+<title>Random Activity Generator!</title>
+
+</head>
+{% endblock %}
+
+{% block body %}
+<!-- Add icon library -->
+<body>
+
+<h1 class="title">Click one of the buttons below to see a suggested activity:</h1>
+<div class="title" id="output"></div>
+<div class="grid-container">
+<input class="btn" type = "button" onclick="find_activity_types()" value="Try the Random Activity Generator!"/>
+</div>
+<div class=padding></div>
+
+
+
+ <script type="text/javascript">
+  var types_dic = {1: 'charity', 2: 'relaxation', 3: 'education', 4: 'recreational',
+             5: 'music', 6: 'social', 7: 'cooking', 8: 'busywork', 9: 'diy'}
+  var num = Math.floor(Math.random() * (9 - 1) + 1);
+  console.log(num);
+
+  var output = document.getElementById('output');
+  var answer = types_dic[num]
+  function find_activity_types() {
+  const Parturl = "https://www.boredapi.com/api/activity?type="
+  const url = Parturl + answer
+  const Http = new XMLHttpRequest();
+ Http.open("GET", url);
+  Http.send();
+  Http.onreadystatechange = (e) => {
+  data = Http.responseText;
+  var jsonResponse = JSON.parse(data);
+  var activity = jsonResponse["activity"];
+
+  output.innerHTML = activity;
+ }
+}
+
+
+</script>
+</body>
+{% endblock %}
